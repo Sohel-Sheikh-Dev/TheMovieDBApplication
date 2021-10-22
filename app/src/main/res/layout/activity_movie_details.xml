@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/taglineTV">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/detailsAppBarLayout"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/detailsToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <ImageView
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerHorizontal="true"
+            android:elevation="4dp"
+            android:padding="5dp"
+            android:src="@drawable/tmdblogo" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            android:elevation="4dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_round_person_24" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_round_view_headline_24" />
+
+        <ImageView
+            android:id="@+id/detailsSearchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_round_search_24" />
+
+        <ImageView
+            android:id="@+id/detailsCloseButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_round_close_24"
+            android:visibility="gone" />
+
+
+        <EditText
+            android:id="@+id/detailsSearchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@id/detailsAppBarLayout"
+            android:background="@color/white"
+            android:drawableStart="@drawable/ic_round_search_black"
+            android:elevation="2dp"
+            android:hint="Search"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:paddingStart="15dp"
+            android:visibility="gone" />
+
+
+        <RelativeLayout
+            android:id="@+id/detailsRelativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_below="@id/detailsAppBarLayout"
+            android:background="#000000">
+
+            <ImageView
+                android:id="@+id/detailsIV"
+                android:layout_width="300dp"
+                android:layout_height="match_parent"
+
+                android:layout_alignParentEnd="true"
+                android:scaleType="centerCrop" />
+
+            <!-- Add a cardView of poster
+                here... -->
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/titleAndDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/detailsRelativeLayout"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/titleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Venom: Let there be carnage"
+                android:maxLines="1"
+                android:textSize="18dp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="("
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/dateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Year"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=")"
+                android:textSize="15dp" />
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/scoreAndDivider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleAndDate"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ProgressBar
+                        android:id="@+id/TVratingProgress"
+                        style="@style/CircularDeterminateProgressBar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentStart="true"
+                        android:background="@drawable/bg_rating"
+                        android:indeterminateOnly="false"
+                        android:progressDrawable="@drawable/circle_green" />
+
+                    <TextView
+                        android:id="@+id/TvRatingPercentage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/TVratingProgress"
+                        android:layout_alignTop="@id/TVratingProgress"
+                        android:layout_alignEnd="@id/TVratingProgress"
+                        android:layout_alignBottom="@id/TVratingProgress"
+                        android:layout_marginEnd="1dp"
+                        android:background="#00000000"
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:paddingEnd="2dp"
+                        android:text="80"
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/TVpercentSign"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignStart="@id/TVratingProgress"
+                        android:layout_alignTop="@id/TVratingProgress"
+                        android:layout_alignEnd="@id/TVratingProgress"
+                        android:layout_alignBottom="@id/TVratingProgress"
+                        android:layout_marginStart="23dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="#00000000"
+                        android:elevation="2dp"
+                        android:gravity="center"
+                        android:text="%"
+                        android:textColor="@color/white"
+                        android:textSize="5sp" />
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/scoreTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:text="User Score"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="20dp"
+                    android:layout_marginStart="25dp"
+                    android:background="@android:color/darker_gray" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="30dp"
+                    android:src="@drawable/ic_baseline_play_arrow_24"/>
+
+                <TextView
+                    android:id="@+id/trailerTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:text="Play Trailer"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/dateTimeGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/scoreAndDivider"
+            android:gravity="center"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp">
+
+            <TextView
+                android:id="@+id/fullDateTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DD/MM//YY"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/dotTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/fullDateTV"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="•"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/fullTimeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/dotTV"
+                android:text="0h 00m"
+                android:textSize="18dp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/genreTV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dateTimeGenre"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:text="Action, Adventure, Comedy"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/taglineTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/genreTV"
+            android:textStyle="italic"
+            android:fontFamily="sans-serif-condensed"
+            android:paddingLeft="20dp"
+            android:textColor="#675B5B"
+            android:text="The fight for tomorrow begins today."
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/overviewTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/taglineTV"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:text="Overview"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/overviewListTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/overviewTV"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview  overview overview overview overview overview overview"
+            android:textSize="20dp" />
+
+        <!--Add a recycler view of grid layout for crews -
+        https://stackoverflow.com/questions/40587168/simple-android-grid-example-using-recyclerview-with-gridlayoutmanager-like-the
+        here.....
+        -->
+
+        <TextView
+            android:id="@+id/topBilledCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/overviewListTV"
+            android:paddingLeft="20dp"
+            android:paddingTop="2dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="Top Billed Cast"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <!--Add a vertical recycler view for top billed cast-
+        here.....
+        -->
+
+        <Button
+            android:id="@+id/castCrewButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topBilledCast"
+            android:background="#ffffff"
+            android:gravity="start"
+            android:padding="20dp"
+            android:text="Full Cast  and Crew"
+            android:textSize="15dp" />
+
+        <!-- A divider
+            here.... -->
+
+        <LinearLayout
+            android:id="@+id/socialAndDiscussions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/castCrewButton"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/socialTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:text="Social"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <!-- make this button transparent -->
+            <Button
+                android:id="@+id/discussionsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Discussions" />
+
+            <!-- make this button transparent -->
+            <Button
+                android:id="@+id/reviewsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reviews" />
+
+        </LinearLayout>
+
+        <!-- A cardView
+            here....-->
+
+        <Button
+            android:id="@+id/reviewsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/socialAndDiscussions"
+            android:background="#ffffff"
+            android:gravity="start"
+            android:padding="20dp"
+            android:text="Read All Reviews"
+            android:textSize="15dp" />
+
+
+        <LinearLayout
+            android:id="@+id/mediaLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/reviewsButton"
+            android:orientation="horizontal"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/mediaTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="50dp"
+                android:text="Media"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/videosTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Videos"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/postersTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Posters"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/backdropsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:text="Backdrops"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <!--Add a vertical recycler view for media
+            here.....
+            -->
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/recommendationsTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mediaLinearLayout"
+            android:layout_alignParentStart="true"
+            android:padding="20dp"
+            android:text="Recommendations"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <!--Add a vertical recycler view for recommendation
+        here.....
+        -->
+
+
+        <LinearLayout
+            android:id="@+id/tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recommendationsTV"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/statusTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Status"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/statusResultTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="Released"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/originalLangTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:paddingTop="20dp"
+                android:text="Original Language"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/originalLangResultTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="English"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/budgetTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:paddingTop="20dp"
+                android:text="Budget"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/budgetResultTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="$XX,000,000.00"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/revenueTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:paddingTop="20dp"
+                android:text="Revenue"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/revenueResultTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:text="$XXX,100,000.00"
+                android:textSize="15dp" />
+
+
+            <TextView
+                android:id="@+id/keywordsTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:paddingTop="40dp"
+                android:text="Keywords"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!--Add a recycler view of grid layout for keywords -
+        https://stackoverflow.com/questions/40587168/simple-android-grid-example-using-recyclerview-with-gridlayoutmanager-like-the
+        here.....
+        -->
+
+
+    </RelativeLayout>
+
+</ScrollView>
+
+
+    <!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--    xmlns:tools="http://schemas.android.com/tools"-->
+    <!--    android:layout_width="match_parent"-->
+    <!--    android:layout_height="match_parent">-->
+
+    <!--    <androidx.recyclerview.widget.RecyclerView-->
+    <!--        android:id="@+id/mediaRecyclerView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="250dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"/>-->
+
+    <!--    <RelativeLayout-->
+    <!--        android:id="@+id/releaseDatesRL"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="100dp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/mediaRecyclerView">-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textViewReleaseDate"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:textSize="40sp" />-->
+
+    <!--        <TextView-->
+    <!--            android:id="@+id/textViewTVReleaseDate"-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:textSize="40sp" />-->
+
+    <!--    </RelativeLayout>-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewRuntime"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="96dp"-->
+    <!--        android:text="TextView"-->
+    <!--        android:textSize="40sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/releaseDatesRL" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewVoteAverage"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="84dp"-->
+    <!--        android:text="TextView"-->
+    <!--        android:textSize="40sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="0.498"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/textViewRuntime" />-->
+    <!--</androidx.constraintlayout.widget.ConstraintLayout>-->
