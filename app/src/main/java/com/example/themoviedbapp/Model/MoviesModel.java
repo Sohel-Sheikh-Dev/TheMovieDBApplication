@@ -1,37 +1,124 @@
 package com.example.themoviedbapp.Model;
 
+import com.example.themoviedbapp.Response.CreditsResponse;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class MoviesModel {
 
     @SerializedName("id")
     public int movie_id;
 
-    public String title,overview,release_date,tagline,backdrop_path,poster_path,name;
+    public String title, overview, release_date, tagline, backdrop_path, poster_path, name, status, original_language, budget, revenue;
 
     @SerializedName("first_air_date")
     public String air_date;
 
     public int runtime;
 
-    public int [] episode_run_time;
+    public String author;
 
+    //    public GenreResponse genres;
+    public List<GenreModel> genres;
+
+    public int[] episode_run_time;
+
+    public CreditsResponse credits;
 
     public float vote_average;
 
-    public MoviesModel(int movie_id,int [] episode_run_time,String name, String title, String overview, String release_date, String tagline, String backdrop_path, String poster_path, int runtime, float vote_average,String air_date) {
+    public MoviesModel(int movie_id, String title, String overview, String release_date, String tagline, String backdrop_path, String poster_path, String name, String status, String original_language, String budget, String revenue, String air_date, int runtime, String author, List<GenreModel> genres, int[] episode_run_time, CreditsResponse credits, float vote_average) {
         this.movie_id = movie_id;
         this.title = title;
         this.overview = overview;
-        this.name = name;
         this.release_date = release_date;
         this.tagline = tagline;
         this.backdrop_path = backdrop_path;
         this.poster_path = poster_path;
-        this.runtime = runtime;
-        this.vote_average = vote_average;
+        this.name = name;
+        this.status = status;
+        this.original_language = original_language;
+        this.budget = budget;
+        this.revenue = revenue;
         this.air_date = air_date;
+        this.runtime = runtime;
+        this.author = author;
+        this.genres = genres;
         this.episode_run_time = episode_run_time;
+        this.credits = credits;
+        this.vote_average = vote_average;
+    }
+
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<GenreModel> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<GenreModel> genres) {
+        this.genres = genres;
+    }
+
+
+//    public GenreResponse getGenres() {
+//        return genres;
+//    }
+//
+//    public void setGenres(GenreResponse genres) {
+//        this.genres = genres;
+//    }
+
+    public CreditsResponse getCredits() {
+        return credits;
+    }
+
+    public void setCredits(CreditsResponse credits) {
+        this.credits = credits;
+    }
+
+    public int getMovie_id() {
+        return movie_id;
+    }
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOriginal_language() {
+        return original_language;
+    }
+
+    public void setOriginal_language(String original_language) {
+        this.original_language = original_language;
+    }
+
+    public String getBudget() {
+        return budget;
+    }
+
+    public void setBudget(String budget) {
+        this.budget = budget;
+    }
+
+    public String getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(String revenue) {
+        this.revenue = revenue;
     }
 
     public int getEpisode_run_time() {
@@ -99,7 +186,7 @@ public class MoviesModel {
     }
 
     public String getBackdrop_path() {
-        return "https://image.tmdb.org/t/p/w500/"+backdrop_path;
+            return "https://www.themoviedb.org/t/p/original/" + backdrop_path;
     }
 
     public void setBackdrop_path(String backdrop_path) {
@@ -107,7 +194,7 @@ public class MoviesModel {
     }
 
     public String getPoster_path() {
-        return "https://image.tmdb.org/t/p/w500/"+poster_path;
+        return "https://www.themoviedb.org/t/p/original/" + poster_path;
     }
 
     public void setPoster_path(String poster_path) {

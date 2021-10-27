@@ -172,12 +172,15 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        trailerRecyclerView = findViewById(R.id.recyclerView2);
-        trailerLinearLayoutManager = new LinearLayoutManager(MainActivity.this);
-        trailerLinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
-        trailerRecyclerView.setLayoutManager(trailerLinearLayoutManager);
-        latestTrailerAdapter = new LatestTrailerAdapter(getApplicationContext(), moviesModelArrayListUpcoming);
-        trailerRecyclerView.setAdapter(latestTrailerAdapter);
+
+
+
+//        trailerRecyclerView = findViewById(R.id.recyclerView2);
+//        trailerLinearLayoutManager = new LinearLayoutManager(MainActivity.this);
+//        trailerLinearLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+//        trailerRecyclerView.setLayoutManager(trailerLinearLayoutManager);
+//        latestTrailerAdapter = new LatestTrailerAdapter(getApplicationContext(), moviesModelArrayListUpcoming);
+//        trailerRecyclerView.setAdapter(latestTrailerAdapter);
 
 //        String met = mainEditText.getText().toString();
 
@@ -207,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
                     sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
                     sliderView.setIndicatorAnimation(IndicatorAnimationType.DROP);
                     sliderView.startAutoCycle();
-                    latestTrailerAdapter.notifyDataSetChanged();
+//                    latestTrailerAdapter.notifyDataSetChanged();
                 }
             }
 

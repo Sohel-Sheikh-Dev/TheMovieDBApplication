@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     private final Context context;
     List<MoviesModel> moviesModelArrayList;
     public static int mid;
+    public static int mpos;
     final int VIEW_TYPE_ONE = 1;
     final int VIEW_TYPE_TWO = 2;
 
@@ -60,11 +62,14 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         if (moviesModelArrayList.get(position).getName() == null) {
 
             ((ViewHolder1) holder).tvTitle.setText(moviesModelArrayList.get(position).getTitle());
+
+//            Toast.makeText(context.getApplicationContext(), "" + moviesModelArrayList.get(0).getCredits().getCast().get(0).getCreditId(), Toast.LENGTH_SHORT).show();
+
 
             @SuppressLint("SimpleDateFormat") String date_format = parseDate(moviesModelArrayList.get(position).getRelease_date(),
                     new SimpleDateFormat("yyyy-MM-dd"),
@@ -74,6 +79,9 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
             float vote = moviesModelArrayList.get(position).getVote_average() * 10;
             int vote_final = Math.round(vote);
+
+            Log.d("togg", "onResponse: "+position);
+
 
             String votePercentage = String.valueOf(vote_final);
 
@@ -117,7 +125,8 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Intent intent = new Intent(context, MovieDetails.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mid = moviesModelArrayList.get(position).getMovieOrTV_id();
-                Toast.makeText(context.getApplicationContext(),"ID: "+mid, Toast.LENGTH_SHORT).show();
+                mpos = vote_final;
+                Toast.makeText(context.getApplicationContext(), "ID: " + mid, Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             });
 
@@ -179,7 +188,7 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 Intent intent = new Intent(context, MovieDetails.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mid = moviesModelArrayList.get(position).getMovieOrTV_id();
-                Toast.makeText(context.getApplicationContext(),"ID: "+mid,Toast.LENGTH_SHORT).show();
+                Toast.makeText(context.getApplicationContext(), "ID: " + mid, Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
             });
 

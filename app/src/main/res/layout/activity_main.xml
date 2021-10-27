@@ -92,14 +92,14 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/search_box"
-            android:imeOptions="actionGo"
-            android:inputType="text"
             android:elevation="1dp"
             android:fontFamily="sans-serif"
             android:hint="Search...."
+            android:imeOptions="actionGo"
+            android:inputType="text"
             android:paddingStart="19dp"
-            android:textColorHint="#757575"
             android:paddingRight="100dp"
+            android:textColorHint="#757575"
             android:textSize="16sp" />
 
         <Button
@@ -115,7 +115,7 @@
             android:text="Search"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <com.smarteist.autoimageslider.SliderView
             android:id="@+id/slider"
@@ -141,20 +141,11 @@
 
     </RelativeLayout>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/welcomeView" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/recyclerView"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/trending" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/welcomeView" />
 
 
     <ProgressBar
