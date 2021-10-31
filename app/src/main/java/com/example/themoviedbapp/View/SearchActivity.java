@@ -1,13 +1,16 @@
 package com.example.themoviedbapp.View;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.themoviedbapp.Adapter.ChildItemSearchAdapter;
+import com.example.themoviedbapp.Details.MovieDetails;
+import com.example.themoviedbapp.Details.TVDetails;
 import com.example.themoviedbapp.Model.MoviesModel;
 import com.example.themoviedbapp.R;
 import com.example.themoviedbapp.Response.MoviesResponse;
@@ -37,7 +42,8 @@ public class SearchActivity extends AppCompatActivity {
     List<MoviesModel> moviesModelArrayListSearch;
     ChildItemSearchAdapter searchViewAdapter;
     String queryText;
-    ImageView accountSearch;
+    ImageView accountSearch, navigationSearch;
+    TextView noResultTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,12 @@ public class SearchActivity extends AppCompatActivity {
         searchMoviesTvShows(queryText);
         searchViewSearch();
 
+        navigationSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SearchActivity.this, "This navigation bar is in Progress!!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         accountSearch.setOnClickListener(new View.OnClickListener() {
@@ -74,15 +86,60 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(SearchActivity.this,MainActivity.class);
+        startActivity(intent);
+    }
+
     private void init() {
         editTextSearch = findViewById(R.id.searchEditText);
         String theQuery = MainActivity.getMainEditText();
         editTextSearch.setText(theQuery);
+        queryText = MainActivity.getMainEditText();
+        noResultTV = findViewById(R.id.noResultTV);
+        navigationSearch = findViewById(R.id.navigationSearch);
+
+        /*
+        if (MainActivity.mainClickedOrDetailsClicked) {
+            String theQuery = MainActivity.getMainEditText();
+            editTextSearch.setText(theQuery);
+        }
+        if (MovieDetails.DetailsClicked) {
+            String theDetailQuery = MovieDetails.getDetailsMainEditText();
+            editTextSearch.setText(theDetailQuery);
+        }
+
+        if (MainActivity.TeleVmainClickedOrDetailsClicked) {
+            String theQuery = MainActivity.getMainEditText();
+            editTextSearch.setText(theQuery);
+        }
+        if (!MainActivity.TeleVmainClickedOrDetailsClicked) {
+            String theTVDetailQuery = TVDetails.TeleVgetDetailsMainEditText();
+            editTextSearch.setText(theTVDetailQuery);
+        }
+*/
+//        Log.d("TAG", "init: " + MainActivity.mainClickedOrDetailsClicked);
 
         searchButton = findViewById(R.id.searchButton);
         searchRecyclerView = findViewById(R.id.recyclerViewSearch);
         progressBar = findViewById(R.id.progressBar);
-        queryText = MainActivity.getMainEditText();
+//        if (MainActivity.mainClickedOrDetailsClicked) {
+//            queryText = MainActivity.getMainEditText();
+//        }
+//        if (MovieDetails.DetailsClicked) {
+//            queryText = MovieDetails.getDetailsMainEditText();
+//        }
+
+//        if (MainActivity.TeleVmainClickedOrDetailsClicked) {
+//            queryText = MainActivity.getMainEditText();
+//        }
+//        if (!MainActivity.TeleVmainClickedOrDetailsClicked) {
+//            queryText = TVDetails.TeleVgetDetailsMainEditText();
+//        }
+
+//        Log.d("TAG", "init: " + MainActivity.mainClickedOrDetailsClicked);
+
         moviesModelArrayListSearch = new ArrayList<>();
         searchViewAdapter = new ChildItemSearchAdapter(SearchActivity.this, moviesModelArrayListSearch);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(SearchActivity.this);
@@ -101,7 +158,12 @@ public class SearchActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     progressBar.setVisibility(View.GONE);
                     moviesModelArrayListSearch.addAll(response.body().getResults());
+                    noResultTV.setVisibility(View.GONE);
                     searchViewAdapter.notifyDataSetChanged();
+                }
+                if(response.body().getResults().size() == 0){
+                    noResultTV.setVisibility(View.VISIBLE);
+//                    Toast.makeText(SearchActivity.this,"No result",Toast.LENGTH_SHORT).show();
                 }
             }
 

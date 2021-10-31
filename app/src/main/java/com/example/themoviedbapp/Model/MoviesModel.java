@@ -1,6 +1,7 @@
 package com.example.themoviedbapp.Model;
 
 import com.example.themoviedbapp.Response.CreditsResponse;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -22,12 +23,39 @@ public class MoviesModel {
     //    public GenreResponse genres;
     public List<GenreModel> genres;
 
-    public int[] episode_run_time;
+    @SerializedName("episode_run_time")
+    @Expose
+    public List<Integer> episodeRunTime = null;
+
+//    public int[] episode_run_time;
 
     public CreditsResponse credits;
 
     public float vote_average;
 
+    public MoviesModel(int movie_id, String title, String overview, String release_date, String tagline, String backdrop_path, String poster_path, String name, String status, String original_language, String budget, String revenue, String air_date, int runtime, String author, List<GenreModel> genres, List<Integer> episodeRunTime, CreditsResponse credits, float vote_average) {
+        this.movie_id = movie_id;
+        this.title = title;
+        this.overview = overview;
+        this.release_date = release_date;
+        this.tagline = tagline;
+        this.backdrop_path = backdrop_path;
+        this.poster_path = poster_path;
+        this.name = name;
+        this.status = status;
+        this.original_language = original_language;
+        this.budget = budget;
+        this.revenue = revenue;
+        this.air_date = air_date;
+        this.runtime = runtime;
+        this.author = author;
+        this.genres = genres;
+        this.episodeRunTime = episodeRunTime;
+        this.credits = credits;
+        this.vote_average = vote_average;
+    }
+
+    /*
     public MoviesModel(int movie_id, String title, String overview, String release_date, String tagline, String backdrop_path, String poster_path, String name, String status, String original_language, String budget, String revenue, String air_date, int runtime, String author, List<GenreModel> genres, int[] episode_run_time, CreditsResponse credits, float vote_average) {
         this.movie_id = movie_id;
         this.title = title;
@@ -49,7 +77,7 @@ public class MoviesModel {
         this.credits = credits;
         this.vote_average = vote_average;
     }
-
+*/
 
     public String getAuthor() {
         return author;
@@ -121,6 +149,15 @@ public class MoviesModel {
         this.revenue = revenue;
     }
 
+    public List<Integer> getEpisodeRunTime() {
+        return episodeRunTime;
+    }
+
+    public void setEpisodeRunTime(List<Integer> episodeRunTime) {
+        this.episodeRunTime = episodeRunTime;
+    }
+
+/*
     public int getEpisode_run_time() {
         return episode_run_time[0];
     }
@@ -128,7 +165,7 @@ public class MoviesModel {
     public void setEpisode_run_time(int[] episode_run_time) {
         this.episode_run_time = episode_run_time;
     }
-
+*/
     public String getAir_date() {
         return air_date;
     }

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.themoviedbapp.Details.MovieDetails;
+import com.example.themoviedbapp.Details.TVDetails;
 import com.example.themoviedbapp.Model.MoviesModel;
 import com.example.themoviedbapp.R;
 
@@ -31,7 +33,8 @@ import java.util.List;
 public class ChildItemSearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final Context context;
     List<MoviesModel> moviesModelArrayList;
-    public static int mid;
+    public static int mids;
+    public static int mposs;
     final int VIEW_TYPE_ONE = 1;
     final int VIEW_TYPE_TWO = 2;
 
@@ -76,12 +79,17 @@ public class ChildItemSearchAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((ChildItemSearchAdapter.ViewHolder1) holder).tvDescription.setText("");
             }
 
+            float vote = moviesModelArrayList.get(position).getVote_average() * 10;
+            int vote_final = Math.round(vote);
+
             Glide.with(context).load(moviesModelArrayList.get(position).getPoster_path()).into(((ChildItemSearchAdapter.ViewHolder1) holder).cardImage);
             ((ChildItemSearchAdapter.ViewHolder1) holder).cardview.setOnClickListener(view -> {
-
                 Intent intent = new Intent(context, MovieDetails.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mid = moviesModelArrayList.get(position).getMovieOrTV_id();
+                mposs = vote_final;
+                mids = moviesModelArrayList.get(position).getMovieOrTV_id();
+//                Toast.makeText(context.getApplicationContext(), "ID: " + mids, Toast.LENGTH_SHORT).show();
+                ChildItemAdapter.which_movie_item = false;
                 context.startActivity(intent);
             });
 
@@ -112,12 +120,18 @@ public class ChildItemSearchAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                 ((ViewHolder2) holder).tvDescriptionSEARCHACT.setText("");
             }
 
+            float vote = moviesModelArrayList.get(position).getVote_average() * 10;
+            int vote_final = Math.round(vote);
+
             Glide.with(context).load(moviesModelArrayList.get(position).getPoster_path()).into(((ViewHolder2) holder).cardImageSEARCHACT);
             ((ViewHolder2) holder).cardViewSEARCHACT.setOnClickListener(view -> {
 
-                Intent intent = new Intent(context, MovieDetails.class);
+                Intent intent = new Intent(context, TVDetails.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mid = moviesModelArrayList.get(position).getMovieOrTV_id();
+                mposs = vote_final;
+                mids = moviesModelArrayList.get(position).getMovieOrTV_id();
+//                Toast.makeText(context.getApplicationContext(), "ID: " + mids, Toast.LENGTH_SHORT).show();
+                ChildItemAdapter.which_tv_item = false;
                 context.startActivity(intent);
             });
 
@@ -173,7 +187,7 @@ public class ChildItemSearchAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             tvTitle = itemView.findViewById(R.id.title);
             tvDescription = itemView.findViewById(R.id.description);
             tvDate = itemView.findViewById(R.id.date);
-            cardview = itemView.findViewById(R.id.movieOrTvCardViews);
+            cardview = itemView.findViewById(R.id.SearchmovieOrTvCardViews);
             searchButton = itemView.findViewById(R.id.searchButton);
             mainEditText = itemView.findViewById(R.id.search);
             tvOnlyTitleWhileNull = itemView.findViewById(R.id.onlyTitleWhileNull);

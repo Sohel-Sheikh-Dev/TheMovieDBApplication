@@ -61,8 +61,10 @@ public class MainActivity extends AppCompatActivity {
     private SliderAdapter sliderAdapter;
     private SliderView sliderView;
     Toolbar toolbar;
-    ImageView mainAccount;
+    ImageView mainAccount,navigationMain;
 
+    public static boolean mainClickedOrDetailsClicked;
+    public static boolean TeleVmainClickedOrDetailsClicked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +77,17 @@ public class MainActivity extends AppCompatActivity {
         getMoviesAndTVs();
         search();
         accountInfo();
+        navigationInfo();
 
+    }
+
+    private void navigationInfo() {
+        navigationMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "This navigation bar is in Progress!!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void accountInfo() {
@@ -93,10 +105,12 @@ public class MainActivity extends AppCompatActivity {
             if (TextUtils.isEmpty(mainEditText.getText().toString())) {
                 mainEditText.setError("Please enter the query");
             } else {
+                mainClickedOrDetailsClicked = true;
+                TeleVmainClickedOrDetailsClicked = true;
                 Intent intent = new Intent(view.getContext(), SearchActivity.class);
                 intent.putExtra("query", mainEditText.toString());
                 startActivity(intent);
-                Toast.makeText(view.getContext(), "" + mainEditText.getText().toString(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(view.getContext(), "" + mainEditText.getText().toString(), Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -121,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static String getMainEditText() {
         return mainEditText.getText().toString();
-
     }
 
     private void getMoviesAndTVs() {
@@ -166,6 +179,7 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         toolbar = findViewById(R.id.toolbar);
         mainAccount = findViewById(R.id.mainAccount);
+        navigationMain = findViewById(R.id.navigationMain);
 
         recyclerView = findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(MainActivity.this);

@@ -2,8 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_below="@+id/taglineTV">
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,6 +35,7 @@
             android:src="@drawable/tmdblogo" />
 
         <ImageView
+            android:id="@+id/accountMovieDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -46,12 +46,14 @@
             android:src="@drawable/ic_round_person_24" />
 
         <ImageView
+            android:id="@+id/navigationMovieDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:elevation="4dp"
             android:padding="10dp"
             android:src="@drawable/ic_round_view_headline_24" />
+
 
         <ImageView
             android:id="@+id/detailsSearchButton"
@@ -89,6 +91,21 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:paddingStart="15dp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/detailsSearchTextButton"
+            android:layout_width="95dp"
+            android:layout_height="45dp"
+            android:layout_below="@id/detailsAppBarLayout"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/search_act_button"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="Search"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             android:visibility="gone" />
 
 
@@ -141,39 +158,33 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/detailsRelativeLayout"
             android:layout_centerHorizontal="true"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
             android:layout_marginBottom="20dp"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/titleTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:text="Venom: Let there be carnage"
+                android:maxLines="2"
+                android:text="Doctor Strange in the Multiverse of madness"
+                android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:text="("
-                android:textSize="15dp" />
 
             <TextView
                 android:id="@+id/dateTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Year"
+                android:paddingBottom="2dp"
+                android:text="(Year)"
                 android:textSize="15dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=")"
-                android:textSize="15dp" />
 
         </LinearLayout>
 
@@ -253,6 +264,7 @@
                 android:background="@android:color/darker_gray" />
 
             <ImageView
+                android:id="@+id/playImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="30dp"
@@ -359,23 +371,44 @@
             android:textSize="25dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/overviewListTV"
+        <RelativeLayout
+            android:id="@+id/overview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/overviewTV"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="sans-serif"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview  overview overview overview overview overview overview"
-            android:textSize="16dp" />
+            android:layout_below="@+id/overviewTV">
+
+            <TextView
+                android:id="@+id/overviewListTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="sans-serif"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview overview  overview overview overview overview overview overview"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/noOverview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:gravity="center"
+                android:text="We don't have any overeviews for this"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
 
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:layout_below="@id/overviewListTV"
+            android:layout_below="@id/overview"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
@@ -401,12 +434,32 @@
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/topCastRV"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_below="@+id/topBilledCast"
-            android:paddingStart="20dp" />
+        <RelativeLayout
+            android:id="@+id/cast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/topBilledCast">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/topCastRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="20dp" />
+
+            <TextView
+                android:id="@+id/noCast"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:gravity="center"
+                android:text="Cast is not available for this"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
 
         <!-- A button for full cast and Crew
         <Button
@@ -425,7 +478,7 @@
             android:id="@+id/socialAndDiscussions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/topCastRV"
+            android:layout_below="@+id/cast"
             android:padding="15dp">
 
             <TextView
@@ -464,27 +517,27 @@
                 android:background="@drawable/bgposter" />
 
 
-
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/reviewsRV"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="150dp"
                 android:layout_below="@+id/reviewDivider"
                 android:layout_marginTop="10dp" />
 
             <TextView
+                android:id="@+id/noReview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="We don't have any reviews for this"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                android:textColor="@color/black"
+                android:layout_below="@+id/reviewDivider"
+                android:layout_margin="70dp"
                 android:gravity="center"
-                android:layout_marginTop="15dp"
-                android:layout_below="@+id/reviewDivider" />
+                android:text="We don't have any reviews for this"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </RelativeLayout>
-
 
 
         <!-- A cardView
@@ -517,6 +570,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="50dp"
                 android:text="Media"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -553,29 +607,84 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/media"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mediaLinearLayout">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mediaVidRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="5dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mediaImgRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/noMedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="70dp"
+                android:gravity="center"
+                android:text="We don't have any media for this"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
         <TextView
             android:id="@+id/recommendationsTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/mediaLinearLayout"
+            android:layout_below="@+id/media"
             android:layout_alignParentStart="true"
             android:padding="20dp"
             android:text="Recommendations"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recommendationsRV"
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:id="@+id/recommendations"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/recommendationsTV" />
+            android:layout_below="@+id/recommendationsTV">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendationsRV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/noRecommendation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="50dp"
+                android:gravity="center"
+                android:text="We don't have any recommendation for this"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+        </RelativeLayout>
 
 
         <LinearLayout
             android:id="@+id/tags"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/recommendationsRV"
+            android:layout_below="@+id/recommendations"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -585,6 +694,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:text="Status"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -604,6 +714,7 @@
                 android:layout_alignParentStart="true"
                 android:paddingTop="20dp"
                 android:text="Original Language"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -623,6 +734,7 @@
                 android:layout_alignParentStart="true"
                 android:paddingTop="20dp"
                 android:text="Budget"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -642,6 +754,7 @@
                 android:layout_alignParentStart="true"
                 android:paddingTop="20dp"
                 android:text="Revenue"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -653,7 +766,8 @@
                 android:text="$XXX,100,000.00"
                 android:textSize="15dp" />
 
-
+            <!--
+            Remember to add this keyword feature
             <TextView
                 android:id="@+id/keywordsTV"
                 android:layout_width="wrap_content"
@@ -663,7 +777,7 @@
                 android:text="Keywords"
                 android:textSize="20dp"
                 android:textStyle="bold" />
-
+-->
         </LinearLayout>
 
         <!--Add a recycler view of grid layout for keywords -

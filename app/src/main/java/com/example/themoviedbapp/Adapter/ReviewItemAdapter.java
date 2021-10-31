@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -39,7 +41,7 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Vi
 
         String ava = (reviewsModelList.get(position).getAuthorDetails().getAvatarPath());
 
-        String uni = "https://cdn-icons.flaticon.com/png/512/1144/premium/1144760.png?token=exp=1635333630~hmac=1cb120e3ffa39d2004740925184f13a0";
+        String uni = "https://cdn2.iconfinder.com/data/icons/gaming-and-beyond-part-2-1/80/User_gray-512.png";
 
         String otherAvatar = "https://www.themoviedb.org/t/p/w150_and_h150_face";
 
@@ -54,6 +56,26 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Vi
             Glide.with(context.getApplicationContext()).load(otherAvatar+ava).into(holder.avatar);
         }
 
+        holder.detailedReviewResult.setText(reviewsModelList.get(position).getContent());
+
+        holder.dropDownButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.detailedReview.setVisibility(View.VISIBLE);
+                holder.upButton.setVisibility(View.VISIBLE);
+                holder.dropDownButton.setVisibility(View.GONE);
+            }
+        });
+
+        holder.upButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.detailedReview.setVisibility(View.GONE);
+                holder.upButton.setVisibility(View.GONE);
+                holder.dropDownButton.setVisibility(View.VISIBLE);
+            }
+        });
+
 
     }
 
@@ -65,13 +87,19 @@ public class ReviewItemAdapter extends RecyclerView.Adapter<ReviewItemAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView avatar;
-        TextView authorName;
+        TextView authorName,detailedReviewResult;
+        ScrollView detailedReview;
+        Button dropDownButton, upButton;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             authorName = itemView.findViewById(R.id.authorName);
             avatar = itemView.findViewById(R.id.avatar);
+            detailedReview = itemView.findViewById(R.id.detailedReview);
+            dropDownButton = itemView.findViewById(R.id.dropdownButton);
+            upButton = itemView.findViewById(R.id.UpButton);
+            detailedReviewResult = itemView.findViewById(R.id.detailedReviewResult);
 
         }
     }

@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.themoviedbapp.Details.MovieDetails;
+import com.example.themoviedbapp.Details.TVDetails;
 import com.example.themoviedbapp.Model.MoviesModel;
 import com.example.themoviedbapp.R;
 
@@ -41,6 +42,9 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public static int mpos;
     final int VIEW_TYPE_ONE = 1;
     final int VIEW_TYPE_TWO = 2;
+
+    public static boolean which_movie_item;
+    public static boolean which_tv_item;
 
 
     public ChildItemAdapter(Context context, List<MoviesModel> moviesModelArrayList) {
@@ -126,7 +130,8 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mid = moviesModelArrayList.get(position).getMovieOrTV_id();
                 mpos = vote_final;
-                Toast.makeText(context.getApplicationContext(), "ID: " + mid, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context.getApplicationContext(), "ID: " + mid, Toast.LENGTH_SHORT).show();
+                which_movie_item = true;
                 context.startActivity(intent);
             });
 
@@ -185,10 +190,12 @@ public class ChildItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             Glide.with(context).load(moviesModelArrayList.get(position).getPoster_path()).into(((ViewHolder2) holder).TVcardImage);
             ((ViewHolder2) holder).TVcardview.setOnClickListener(view -> {
 
-                Intent intent = new Intent(context, MovieDetails.class);
+                Intent intent = new Intent(context, TVDetails.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mid = moviesModelArrayList.get(position).getMovieOrTV_id();
-                Toast.makeText(context.getApplicationContext(), "ID: " + mid, Toast.LENGTH_SHORT).show();
+                mpos = vote_final;
+//                Toast.makeText(context.getApplicationContext(), "ID: " + mid, Toast.LENGTH_SHORT).show();
+                which_tv_item = true;
                 context.startActivity(intent);
             });
 
